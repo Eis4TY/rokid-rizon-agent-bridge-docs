@@ -9,78 +9,71 @@ description: "灵珠平台对接三方智能体的协议规范与示例。"
 
 ### Header
 
-| 属性 | 类型 | 必填 | 属性值 | 说明 |
-| --- | --- | --- | --- | --- |
-| Authorization | String | 是 | `Bearer <智能体鉴权AK>` | 智能体请求鉴权 |
-| Content-Type | String | 是 | `application/json` | 固定值 |
+| 属性            | 类型     | 必填 | 属性值                | 说明      |
+| ------------- | ------ | --- | ------------------ | ------- |
+| Authorization | String | 是  | `Bearer <智能体鉴权AK>` | 智能体请求鉴权 |
+| Content-Type  | String | 是  | `application/json` | 固定值     |
 
 ### Body
 
-| 属性 | 类型 | 必填 | 说明 |
-| --- | --- | --- | --- |
-| message_id | String | 是 | 消息 ID，维持上下文 |
-| agent_id | String | 是 | 智能体 ID |
-| message | Message Object[] | 是 | 用户输入数组 |
-| user_id | String | 否 | 用户 ID |
-| metadata | Metadata Object | 否 | 可选元数据 |
+| 属性         | 类型               | 必填 | 说明          |
+| ---------- | ---------------- | --- | ----------- |
+| message_id | String           | 是  | 消息 ID，维持上下文 |
+| agent_id   | String           | 是  | 智能体 ID      |
+| message    | Message Object[] | 是  | 用户输入数组      |
+| user_id    | String           | 否  | 用户 ID       |
+| metadata   | Metadata Object  | 否  | 可选元数据       |
 
 ## Message Object
 
-| 属性 | 类型 | 必填 | 说明 |
-| --- | --- | --- | --- |
-| role | string | 是 | 角色：`user` / `agent` |
-| type | string | 是 | 消息类型：`text` / `image` |
-| text | string | 否 | 文本内容（`type=text` 时必填） |
-| image_url | string | 否 | 图片内容（`type=image` 时必填） |
+| 属性        | 类型     | 必填 | 说明                     |
+| --------- | ------ | --- | ---------------------- |
+| role      | string | 是  | 角色：`user` / `agent`    |
+| type      | string | 是  | 消息类型：`text` / `image`  |
+| text      | string | 否  | 文本内容（`type=text` 时必填）  |
+| image_url | string | 否  | 图片内容（`type=image` 时必填） |
 
 ## Metadata Object
 
-| 属性 | 类型 | 必填 | 说明 |
-| --- | --- | --- | --- |
-| context | Context Object | 是 | 灵珠平台传入的设备信息（天气、电量、位置等） |
+| 属性      | 类型             | 必填 | 说明                     |
+| ------- | -------------- | --- | ---------------------- |
+| context | Context Object | 是  | 灵珠平台传入的设备信息（天气、电量、位置等） |
 
 ## Context Object
 
-| 属性 | 类型 | 必填 | 说明 |
-| --- | --- | --- | --- |
-| location | string | 是 | 设备当前所在位置信息 |
-| latitude | string | 是 | 设备当前所在纬度 |
-| longitude | string | 是 | 设备当前所在经度 |
-| weather | string | 是 | 设备当前所在地天气信息 |
-| battery | string | 是 | 设备当前电量 |
+| 属性        | 类型     | 必填 | 说明          |
+| --------- | ------ | --- | ----------- |
+| location  | string | 是  | 设备当前所在位置信息  |
+| latitude  | string | 是  | 设备当前所在纬度    |
+| longitude | string | 是  | 设备当前所在经度    |
+| weather   | string | 是  | 设备当前所在地天气信息 |
+| battery   | string | 是  | 设备当前电量      |
 
 ## SSE 输出协议（响应）
 
 ### 事件行
 
-| 字段 | 类型 | 必填 | 取值 | 说明 |
-| --- | --- | --- | --- | --- |
-| event | event | 是 | `message` / `done` | 事件类型，`done` 表示结束 |
+| 字段    | 类型    | 必填 | 取值                 | 说明               |
+| ----- | ----- | --- | ------------------ | ---------------- |
+| event | event | 是  | `message` / `done` | 事件类型，`done` 表示结束 |
 
 ### data 对象
 
-| 字段 | 类型 | 必填 | 取值 | 说明 |
-| --- | --- | --- | --- | --- |
-| role | String | 是 | `agent` | 角色 |
-| message_id | String | 是 | 消息 ID | 维持上下文 |
-| agent_id | String | 是 | 智能体 ID |  |
-| answer_stream | String | 否 | 输出内容 | 流式输出 |
-| is_finish | Boolean | 是 | true/false | 是否完成 |
-| type | String | 是 | `answer` / `tool_call` / `follow_up` | 返回类型（文本/工具调用/用户问题建议） |
-| follow_up | string[] | 否 | 用户问题建议 | 用户问题建议列表 |
-| tool_call | Tool Object | 否 | 工具调用 | 工具调用 |
+<table style="min-width: 125px">
+<colgroup><col style="min-width: 25px"><col style="min-width: 25px"><col style="min-width: 25px"><col style="min-width: 25px"><col style="min-width: 25px"></colgroup><tbody><tr><th colspan="1" rowspan="1"><p>字段</p></th><th colspan="1" rowspan="1"><p>类型</p></th><th colspan="1" rowspan="1"><p>必填</p></th><th colspan="1" rowspan="1"><p>取值</p></th><th colspan="1" rowspan="1"><p>说明</p></th></tr><tr><td colspan="1" rowspan="1"><p>role</p></td><td colspan="1" rowspan="1"><p>String</p></td><td colspan="1" rowspan="1"><p>是</p></td><td colspan="1" rowspan="1"><p><code spellcheck="false">agent</code></p></td><td colspan="1" rowspan="1"><p>角色</p></td></tr><tr><td colspan="1" rowspan="1"><p>message_id</p></td><td colspan="1" rowspan="1"><p>String</p></td><td colspan="1" rowspan="1"><p>是</p></td><td colspan="1" rowspan="1"><p>消息 ID</p></td><td colspan="1" rowspan="1"><p>维持上下文</p></td></tr><tr><td colspan="1" rowspan="1"><p>agent_id</p></td><td colspan="1" rowspan="1"><p>String</p></td><td colspan="1" rowspan="1"><p>是</p></td><td colspan="1" rowspan="1"><p>智能体 ID</p></td></tr><tr><td colspan="1" rowspan="1"><p>answer_stream</p></td><td colspan="1" rowspan="1"><p>String</p></td><td colspan="1" rowspan="1"><p>否</p></td><td colspan="1" rowspan="1"><p>输出内容</p></td><td colspan="1" rowspan="1"><p>流式输出</p></td></tr><tr><td colspan="1" rowspan="1"><p>is_finish</p></td><td colspan="1" rowspan="1"><p>Boolean</p></td><td colspan="1" rowspan="1"><p>是</p></td><td colspan="1" rowspan="1"><p>true/false</p></td><td colspan="1" rowspan="1"><p>是否完成</p></td></tr><tr><td colspan="1" rowspan="1"><p>type</p></td><td colspan="1" rowspan="1"><p>String</p></td><td colspan="1" rowspan="1"><p>是</p></td><td colspan="1" rowspan="1"><p><code spellcheck="false">answer</code> / <code spellcheck="false">tool_call</code> / <code spellcheck="false">follow_up</code></p></td><td colspan="1" rowspan="1"><p>返回类型（文本/工具调用/用户问题建议）</p></td></tr><tr><td colspan="1" rowspan="1"><p>follow_up</p></td><td colspan="1" rowspan="1"><p>string[]</p></td><td colspan="1" rowspan="1"><p>否</p></td><td colspan="1" rowspan="1"><p>用户问题建议</p></td><td colspan="1" rowspan="1"><p>用户问题建议列表</p></td></tr><tr><td colspan="1" rowspan="1"><p>tool_call</p></td><td colspan="1" rowspan="1"><p>Tool Object</p></td><td colspan="1" rowspan="1"><p>否</p></td><td colspan="1" rowspan="1"><p>工具调用</p></td><td colspan="1" rowspan="1"><p>工具调用</p></td></tr></tbody>
+</table>
 
 ## Tool Object
 
-| 属性 | 类型 | 必填 | 说明 |
-| --- | --- | --- | --- |
-| command | String | 是 | 命令：`take_photo`（拍照）/ `take_navigation`（导航）/ `notify_agent_off`（退出智能体）/ `control_calendar`（添加日程） |
-| action | String | 否 | `take_navigation` 时：`open` / `close`；`control_calendar` 时：`create` |
-| poi_name | String | 否 | `take_navigation` 时：目标地址 |
-| navi_type | String | 否 | 导航类型：`0` 驾车 / `1` 步行 / `2` 骑行 |
-| title | String | 否 | `control_calendar` 时：日程标题 |
-| start_time | String | 否 | `control_calendar` 时：日程开始时间 |
-| end_time | String | 否 | `control_calendar` 时：日程结束时间 |
+| 属性         | 类型     | 必填 | 说明                                                                                              |
+| ---------- | ------ | --- | ----------------------------------------------------------------------------------------------- |
+| command    | String | 是  | 命令：`take_photo`（拍照）/ `take_navigation`（导航）/ `notify_agent_off`（退出智能体）/ `control_calendar`（添加日程） |
+| action     | String | 否  | `take_navigation` 时：`open` / `close`；`control_calendar` 时：`create`                              |
+| poi_name   | String | 否  | `take_navigation` 时：目标地址                                                                        |
+| navi_type  | String | 否  | 导航类型：`0` 驾车 / `1` 步行 / `2` 骑行                                                                   |
+| title      | String | 否  | `control_calendar` 时：日程标题                                                                       |
+| start_time | String | 否  | `control_calendar` 时：日程开始时间                                                                     |
+| end_time   | String | 否  | `control_calendar` 时：日程结束时间                                                                     |
 
 ## 请求示例（curl）
 
@@ -101,7 +94,7 @@ curl -N -X POST "https://example.com/agent/sse" \
         "latitude": "31.2304",
         "longitude": "121.4737",
         "weather": "晴",
-        "battery": "0.78"
+        "battery": "78"
       }
     }
   }'
