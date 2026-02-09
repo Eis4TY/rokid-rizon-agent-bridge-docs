@@ -59,9 +59,16 @@ description: "灵珠平台对接三方智能体的协议规范与示例。"
 
 ### data 对象
 
-<table style="min-width: 125px">
-<colgroup><col style="min-width: 25px"><col style="min-width: 25px"><col style="min-width: 25px"><col style="min-width: 25px"><col style="min-width: 25px"></colgroup><tbody><tr><th colspan="1" rowspan="1"><p>字段</p></th><th colspan="1" rowspan="1"><p>类型</p></th><th colspan="1" rowspan="1"><p>必填</p></th><th colspan="1" rowspan="1"><p>取值</p></th><th colspan="1" rowspan="1"><p>说明</p></th></tr><tr><td colspan="1" rowspan="1"><p>role</p></td><td colspan="1" rowspan="1"><p>String</p></td><td colspan="1" rowspan="1"><p>是</p></td><td colspan="1" rowspan="1"><p><code spellcheck="false">agent</code></p></td><td colspan="1" rowspan="1"><p>角色</p></td></tr><tr><td colspan="1" rowspan="1"><p>message_id</p></td><td colspan="1" rowspan="1"><p>String</p></td><td colspan="1" rowspan="1"><p>是</p></td><td colspan="1" rowspan="1"><p>消息 ID</p></td><td colspan="1" rowspan="1"><p>维持上下文</p></td></tr><tr><td colspan="1" rowspan="1"><p>agent_id</p></td><td colspan="1" rowspan="1"><p>String</p></td><td colspan="1" rowspan="1"><p>是</p></td><td colspan="1" rowspan="1"><p>智能体 ID</p></td></tr><tr><td colspan="1" rowspan="1"><p>answer_stream</p></td><td colspan="1" rowspan="1"><p>String</p></td><td colspan="1" rowspan="1"><p>否</p></td><td colspan="1" rowspan="1"><p>输出内容</p></td><td colspan="1" rowspan="1"><p>流式输出</p></td></tr><tr><td colspan="1" rowspan="1"><p>is_finish</p></td><td colspan="1" rowspan="1"><p>Boolean</p></td><td colspan="1" rowspan="1"><p>是</p></td><td colspan="1" rowspan="1"><p>true/false</p></td><td colspan="1" rowspan="1"><p>是否完成</p></td></tr><tr><td colspan="1" rowspan="1"><p>type</p></td><td colspan="1" rowspan="1"><p>String</p></td><td colspan="1" rowspan="1"><p>是</p></td><td colspan="1" rowspan="1"><p><code spellcheck="false">answer</code> / <code spellcheck="false">tool_call</code> / <code spellcheck="false">follow_up</code></p></td><td colspan="1" rowspan="1"><p>返回类型（文本/工具调用/用户问题建议）</p></td></tr><tr><td colspan="1" rowspan="1"><p>follow_up</p></td><td colspan="1" rowspan="1"><p>string[]</p></td><td colspan="1" rowspan="1"><p>否</p></td><td colspan="1" rowspan="1"><p>用户问题建议</p></td><td colspan="1" rowspan="1"><p>用户问题建议列表</p></td></tr><tr><td colspan="1" rowspan="1"><p>tool_call</p></td><td colspan="1" rowspan="1"><p>Tool Object</p></td><td colspan="1" rowspan="1"><p>否</p></td><td colspan="1" rowspan="1"><p>工具调用</p></td><td colspan="1" rowspan="1"><p>工具调用</p></td></tr></tbody>
-</table>
+| 字段          | 类型      | 必填 | 取值                                            | 说明           |
+| ----------- | ------- | --- | --------------------------------------------- | -------------- |
+| role        | String  | 是  | `agent`                                       | 角色           |
+| message_id  | String  | 是  | 消息 ID                                         | 维持上下文     |
+| agent_id    | String  | 是  | 智能体 ID                                       |                |
+| answer_stream | String  | 否  | 输出内容                                        | 流式输出       |
+| is_finish   | Boolean | 是  | true/false                                    | 是否完成       |
+| type        | String  | 是  | `answer` / `tool_call` / `follow_up`          | 返回类型（文本/工具调用/用户问题建议） |
+| follow_up   | string[] | 否  | 用户问题建议                                      | 用户问题建议列表   |
+| tool_call   | Tool Object | 否  | 工具调用                                        | 工具调用       |
 
 ## Tool Object
 
