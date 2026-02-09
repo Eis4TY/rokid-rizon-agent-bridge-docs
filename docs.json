@@ -5,14 +5,30 @@
   "colors": {
     "primary": "#2563eb"
   },
+  "logo": "logo/light.svg",
+  "favicon": "favicon.svg",
   "navigation": {
     "groups": [
       {
         "group": "开始",
-        "pages": ["index"]
+        "pages": ["index", "quickstart"]
+      },
+      {
+        "group": "开发",
+        "pages": ["development", "configuration"]
+      },
+      {
+        "group": "使用",
+        "pages": ["usage"]
+      },
+      {
+        "group": "部署",
+        "pages": ["deployment"]
+      },
+      {
+        "group": "支持",
+        "pages": ["troubleshooting"]
       }
     ]
-  },
-  "logo": "docs/icon.png",
-  "favicon": "docs/icon.png"
+  }
 }

@@ -1,0 +1,28 @@
+---
+title: "配置说明"
+description: "本地配置文件与安全建议。"
+---
+
+## settings.json
+
+用于 Bridge API 鉴权：
+
+```json
+{
+  "apiKey": "your-secret-key"
+}
+```
+
+请求需带：
+
+```
+Authorization: Bearer your-secret-key
+```
+
+## bindings.json
+
+由 UI 写入，存储绑定配置（目标协议、模板、鉴权等）。建议**不要提交到 git**，并在部署时挂载持久化文件。
+
+## logs.json
+
+用于保存请求日志。建议**不要提交到 git**。

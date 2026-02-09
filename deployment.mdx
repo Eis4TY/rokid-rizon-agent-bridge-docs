@@ -1,0 +1,34 @@
+---
+title: "部署指南"
+description: "Docker 与生产环境部署建议。"
+---
+
+## Docker 部署
+
+### 构建镜像
+
+```bash
+docker build -t lingzhu-bridge .
+```
+
+### 运行容器
+
+```bash
+docker run -p 3000:3000 \
+  -v $(pwd)/bindings.json:/app/bindings.json \
+  -v $(pwd)/settings.json:/app/settings.json \
+  -v $(pwd)/logs.json:/app/logs.json \
+  lingzhu-bridge
+```
+
+> 建议挂载 `bindings.json` 与 `settings.json` 以持久化配置。
+
+## Node 生产部署
+
+```bash
+npm install --production
+npm run build
+npm run start
+```
+
+确保 `bindings.json`、`settings.json`、`logs.json` 有可写权限。

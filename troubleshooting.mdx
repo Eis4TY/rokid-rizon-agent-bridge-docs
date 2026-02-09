@@ -1,0 +1,26 @@
+---
+title: "故障排查"
+description: "常见问题与定位方式。"
+---
+
+## 绑定请求无响应
+
+- 检查 `Target URL` 是否可达
+- 检查鉴权信息是否正确（Bearer Token / 自定义 Header）
+- 查看服务端日志与 `logs.json`
+
+## 模板渲染失败
+
+- 确认模板 JSON 是合法的
+- 确认路径如 `{{message.0.text}}` 是否存在
+- 若出现 `Template substitution failed`，说明模板或数据结构不匹配
+
+## SSE 不生效
+
+- 目标接口需返回 `Content-Type: text/event-stream`
+- 如果目标接口只支持非流式，使用非流式响应映射即可
+
+## 401 Unauthorized
+
+- 检查 `settings.json` 中的 `apiKey`
+- 调用时带上 `Authorization: Bearer <apiKey>`

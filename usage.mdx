@@ -1,0 +1,63 @@
+---
+title: "使用指南"
+description: "绑定配置、模板映射、沙箱与 API 调用。"
+---
+
+## 绑定类型
+
+- **OpenAI (HTTP)**：适配 OpenAI Compatible 协议
+- **Custom (HTTP)**：通过模板映射任意 HTTP/JSON 接口
+
+## 自定义模板
+
+### 请求模板（Request Template）
+
+```json
+{
+  "model": "my-model",
+  "messages": [
+    { "role": "user", "content": "{{message.0.text}}" }
+  ],
+  "stream": true
+}
+```
+
+### 响应模板（Response Template）
+
+```json
+{
+  "answer": "{{choices.0.delta.content}}",
+  "is_finish": "{{choices.0.finish_reason}}"
+}
+```
+
+> `is_finish` 可与 `finishMatchValue` 配合（如 `stop`）判断结束。
+
+## 沙箱（Sandbox）
+
+- **Trace**：请求处理耗时与关键步骤
+- **Raw Response**：目标接口原始返回
+- **Transformed Preview**：转换后的灵珠格式响应
+
+## Bridge API
+
+```http
+POST /api/bridge/{agentId}
+Authorization: Bearer <settings.json 中的 apiKey>
+Content-Type: application/json
+
+{
+  "message_id": "msg_123",
+  "agent_id": "agent_123",
+  "message": [
+    { "role": "user", "type": "question", "text": "你好" }
+  ]
+}
+```
+
+返回为 SSE 流式：
+
+```
+event: message
+data: {"role":"agent","type":"answer","answer_stream":"...","message_id":"msg_123","agent_id":"agent_123","is_finish":false}
+```
