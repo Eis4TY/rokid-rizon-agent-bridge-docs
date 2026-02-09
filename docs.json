@@ -15,11 +15,23 @@
       },
       {
         "group": "开发",
-        "pages": ["development", "configuration"]
+        "pages": [
+          {
+            "group": "工程与配置",
+            "expanded": true,
+            "pages": ["development", "configuration"]
+          }
+        ]
       },
       {
         "group": "使用",
-        "pages": ["usage"]
+        "pages": [
+          {
+            "group": "绑定与调用",
+            "expanded": true,
+            "pages": ["usage"]
+          }
+        ]
       },
       {
         "group": "部署",
